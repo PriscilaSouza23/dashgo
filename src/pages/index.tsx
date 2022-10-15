@@ -14,10 +14,9 @@ type SignInProps = {
   password: string;
 };
 
-const signInFormSchema = yup.object().shape({
-  password: yup.string().required('Digite sua senha'),
-
-  email: yup.string().required('E-mail obrigatório').email('e-mail inválido'),
+const signInFormSchema = yup.object({
+ email: yup.string().required('E-mail obrigatório').email('E-mail inválido'),
+ password: yup.string().required('Senha obrigatória')
 });
 
 export default function SignIn() {
@@ -52,7 +51,7 @@ export default function SignIn() {
             label="E-mail"
             id="email"
             error={errors.email}
-            {...register("email")}
+            { ...(register("email", { required: "E-mail obrigatório" }))}
           />
 
           <Input
@@ -61,7 +60,7 @@ export default function SignIn() {
             label="Senha"
             id="password"
             error={errors.password}
-            {...register("password")}
+            { ...(register("password", { required: "Senha obrigatório" }))}
           />
         </Stack>
 
